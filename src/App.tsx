@@ -1,6 +1,6 @@
 import { Stack, styled, Typography } from "@mui/material";
-import ThemeController from "./shared/components/ThemeController";
-import Accounts from "./shared/components/Accounts";
+import ThemeController from "./components/ThemeController";
+import Accounts from "./components/Accounts";
 
 function App() {
   return (

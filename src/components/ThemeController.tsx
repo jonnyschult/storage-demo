@@ -1,8 +1,8 @@
 import { styled, Stack, Button, Box, Typography } from "@mui/material";
-import { useThemeMode } from "../hooks/useLocalStorage";
+import { useThemeMode } from "../shared/hooks/useLocalStorage";
 
 const ThemeController = () => {
-  const { setThemeMode } = useThemeMode();
+  const { themeMode, setThemeMode } = useThemeMode();
 
   return (
     <Container>
@@ -12,12 +12,19 @@ const ThemeController = () => {
       </Typography>
 
       <Box display={"flex"} justifyContent={"center"}>
-        <CustomButton onClick={() => setThemeMode("light")} variant="contained">
+        <Button
+          onClick={() => setThemeMode("light")}
+          variant={themeMode === "light" ? "contained" : "outlined"}
+        >
           Light
-        </CustomButton>
-        <CustomButton onClick={() => setThemeMode("dark")} variant="contained">
+        </Button>
+        <Button
+          sx={{ marginLeft: "10px" }}
+          onClick={() => setThemeMode("dark")}
+          variant={themeMode === "dark" ? "contained" : "outlined"}
+        >
           Dark
-        </CustomButton>
+        </Button>
       </Box>
     </Container>
   );
@@ -28,9 +35,3 @@ export default ThemeController;
 const Container = styled(Stack)({
   marginBottom: "80px",
 });
-
-const CustomButton = styled(Button)(({ theme }) => ({
-  background: theme.palette.primary.main,
-  color: theme.palette.primary.contrastText,
-  margin: theme.spacing(2),
-}));

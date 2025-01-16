@@ -9,4 +9,17 @@ export const lightTheme = createTheme({
 export const darkTheme = createTheme({
   palette: darkPalette,
   spacing: 8,
+  components:{
+    MuiButton:{
+      styleOverrides: {
+              root: {
+                '&.Mui-active': {
+                  backgroundColor: darkPalette.primary.main,
+                  // color: darkPalette.primary.contrastText,
+                },
+              },
+            },
+      
+    }
+  }
 });

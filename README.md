@@ -1,50 +1,81 @@
-# React + TypeScript + Vite
+# Storage Demo
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project demonstrates how to use React’s `useSyncExternalStore` hook with both sessionStorage and localStorage. It includes two primary examples:
 
-Currently, two official plugins are available:
+- ThemeController: Toggles light/dark mode and persists the chosen mode in localStorage
+- Accounts: Selects an account type (Checking, Savings, or Retirement) and persists the chosen account in sessionStorage.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Purpose
 
-## Expanding the ESLint configuration
+- Showcase `useSyncExternalStore`: This hook provides an official way to integrate external store subscriptions with React's concurrent rendering features.
+- Local and Session Storage: Demonstrate how to use storage APIs for persisting user preferences and data across browser sessions.
+- Reusable Custom Hooks: Illustrate how to build reusable hooks (`useLocalStorage` and `useSessionStorage`) for any data you want to store.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Project Structure
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```
+src
+ ┣ components
+ ┃   ┣ Accounts.tsx        // Demonstrates sessionStorage usage
+ ┃   ┗ ThemeController.tsx  // Demonstrates localStorage usage
+ ┣ shared
+ ┃   ┣ hooks
+ ┃   ┃   ┣ useLocalStorage.tsx    // Custom hook for localStorage
+ ┃   ┃   ┗ useSessionStorage.tsx  // Custom hook for sessionStorage
+ ┃   ┗ styles
+ ┃       ┣ CustomThemeProvider.tsx
+ ┃       ┗ ...
+ ┣ App.tsx
+ ┣ main.tsx
+ ┗ ...
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Running the App
+Prerequisites
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+- Node.js (version 22.11)
+- pnpm installed
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+Installation & Launch
+
+1. Clone the repository: git clone https://github.com/your-username/storage-demo.git
+
+2. Navigate into the project folder: `cd storage-demo`
+
+3. Install dependencies: `pnpm i`
+
+4. Start the development server: `pnpm dev`
+
+5. Open your browser and go to http://localhost:3000 (or the port your dev server indicates).
+
+Key Dependencies
+
+- React (18+)
+- React DOM (18+)
+- TypeScript
+- Material UI (MUI) (v5+)
+- @emotion/react / @emotion/styled (required by MUI)
+- ESNext features (like optional chaining, etc.)
+
+Note: The exact versions will be in the project’s `package.json`.
+
+## How It Works
+
+`useLocalStorage` and `useSessionStorage` are custom hooks that:
+- Leverage `useSyncExternalStore` for a consistent subscription-based approach.
+- Store and retrieve data from localStorage or sessionStorage.
+- Automatically (reactively) update subscribed components on storage changes (using the `storage` event).
+- ThemeController uses `useLocalStorage` to persist the user’s theme preference (light or dark) across reloads and tabs.
+- Accounts uses `useSessionStorage` to remember the selected account across page reloads but resets if the browser is closed or if the user opens a different tab.
+
+## Contributing
+
+- Fork the repository.
+- Create a new branch with your feature or fix.
+- Open a pull request once your work is ready for review.
+
+## License
+
+This project is open source and available under the MIT License. Feel free to use and adapt it for your own purposes.
+
+Enjoy experimenting with `useSyncExternalStore` in this Storage Demo! If you have questions or run into issues, feel free to open an issue or contribute a pull request. Happy coding! "

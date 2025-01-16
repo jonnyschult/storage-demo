@@ -1,5 +1,5 @@
 import { styled, Stack, Typography, Box, Button } from "@mui/material";
-import { useStoredAccount } from "../hooks/useSessionStorage";
+import { useStoredAccount } from "../shared/hooks/useSessionStorage";
 
 const Accounts = () => {
   const { account, setAccount } = useStoredAccount();
@@ -16,7 +16,10 @@ const Accounts = () => {
         width={"100%"}
       >
         <Typography variant="h5">Checking</Typography>
-        <Button variant="outlined" onClick={() => setAccount("Checking")}>
+        <Button
+          variant={account === "Checking" ? "contained" : "outlined"}
+          onClick={() => setAccount("Checking")}
+        >
           Select
         </Button>
       </Box>
@@ -27,7 +30,10 @@ const Accounts = () => {
         width={"100%"}
       >
         <Typography variant="h5">Savings</Typography>
-        <Button variant="outlined" onClick={() => setAccount("Savings")}>
+        <Button
+          variant={account === "Savings" ? "contained" : "outlined"}
+          onClick={() => setAccount("Savings")}
+        >
           Select
         </Button>
       </Box>
@@ -37,8 +43,11 @@ const Accounts = () => {
         justifyContent={"space-between"}
         width={"100%"}
       >
-        <Typography variant="h5">DAF</Typography>
-        <Button variant="outlined" onClick={() => setAccount("DAF")}>
+        <Typography variant="h5">Retirement</Typography>
+        <Button
+          variant={account === "Retirement" ? "contained" : "outlined"}
+          onClick={() => setAccount("Retirement")}
+        >
           Select
         </Button>
       </Box>
