@@ -16,12 +16,13 @@ This project demonstrates how to use React’s `useSyncExternalStore` hook with 
 ```
 src
  ┣ components
- ┃   ┣ Accounts.tsx        // Demonstrates sessionStorage usage
- ┃   ┗ ThemeController.tsx  // Demonstrates localStorage usage
+ ┃   ┣ Accounts.tsx                 // Demonstrates sessionStorage usage
+ ┃   ┗ ThemeController.tsx          // Demonstrates localStorage usage
  ┣ shared
  ┃   ┣ hooks
- ┃   ┃   ┣ useLocalStorage.tsx    // Custom hook for localStorage
- ┃   ┃   ┗ useSessionStorage.tsx  // Custom hook for sessionStorage
+ ┃   ┃   ┣ useBrowserStorage.tsx    // Custom hook for for creating reactive storage hooks
+ ┃   ┃   ┣ useLocalStorage.tsx      // Custom hook for localStorage
+ ┃   ┃   ┗ useSessionStorage.tsx    // Custom hook for sessionStorage
  ┃   ┗ styles
  ┃       ┣ CustomThemeProvider.tsx
  ┃       ┗ ...
@@ -31,6 +32,7 @@ src
 ```
 
 ## Running the App
+
 Prerequisites
 
 - Node.js (version 22.11)
@@ -61,12 +63,20 @@ Note: The exact versions will be in the project’s `package.json`.
 
 ## How It Works
 
-`useLocalStorage` and `useSessionStorage` are custom hooks that:
-- Leverage `useSyncExternalStore` for a consistent subscription-based approach.
-- Store and retrieve data from localStorage or sessionStorage.
+`useBrowserStorage is a hook that:
+
+- Leverages `useSyncExternalStore` for a consistent subscription-based approach.
+- Accepts a key and a storage type (localStorage or sessionStorage) as arguments.
+- Generates a new hook for the specific storage type.
 - Automatically (reactively) update subscribed components on storage changes (using the `storage` event).
-- ThemeController uses `useLocalStorage` to persist the user’s theme preference (light or dark) across reloads and tabs.
-- Accounts uses `useSessionStorage` to remember the selected account across page reloads but resets if the browser is closed or if the user opens a different tab.
+
+`useLocalStorage` is a hook that:
+
+- Is utilized by `ThemeController` to persist the user’s theme preference (light or dark) across reloads and tabs.
+
+`useSessionStorage` is a hook that:
+
+- Is utilized by Accounts to remember the selected account across page reloads but resets if the browser is closed or if the user opens a different tab.
 
 ## Contributing
 
@@ -78,4 +88,4 @@ Note: The exact versions will be in the project’s `package.json`.
 
 This project is open source and available under the MIT License. Feel free to use and adapt it for your own purposes.
 
-Enjoy experimenting with `useSyncExternalStore` in this Storage Demo! If you have questions or run into issues, feel free to open an issue or contribute a pull request. Happy coding! "
+Enjoy experimenting with `useSyncExternalStore` in this Storage Demo! If you have questions or run into issues, feel free to open an issue or contribute a pull request. Happy coding!
